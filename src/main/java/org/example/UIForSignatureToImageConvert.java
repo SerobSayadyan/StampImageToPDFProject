@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class UIForSignatureToImageConvert {
 
-    private static final File IMG_STAMP_MODEL_NO_SIGNATURE = new File("img/Black Creative Consultant Logo.jpg");
-    private static final File IMG_STAMP_WITH_SIGNATURE = new File("img/Stamp_with_signature.jpg");
+    private static final File IMG_STAMP_MODEL_NO_SIGNATURE = new File(Objects.requireNonNull(UIForSignatureToImageConvert.class.getClassLoader().getResource("img/Black Creative Consultant Logo.jpg")).getPath());
+    private static final File IMG_STAMP_WITH_SIGNATURE = new File(Objects.requireNonNull(UIForSignatureToImageConvert.class.getClassLoader().getResource("img/Stamp_with_signature.jpg")).getPath());
     private static final File DEFAULT_PDF_PATH = new File("pdfs/simple hangman.pdf");
     private static final String RED_CONSOLE_COLOR = "\u001B[31m";
     private static final String YELLOW_CONSOLE_COLOR = "\u001B[33m";
@@ -44,35 +45,10 @@ public class UIForSignatureToImageConvert {
             isTrue = true;
         } while (sign.length() > 3 || sign.isEmpty());
 
+
         addSignatureToStamp(sign);
 
-        String operation;
-
-
-        isTrue = true;
-        do {
-            System.out.println("""
-                                        
-                    Do you want to specify the PDF path
-                    Enter 1 or 'yes' - if yes
-                    Enter 0 or 'no' - if no
-                    """);
-            operation = scanner.nextLine().toLowerCase().trim();
-            switch (operation) {
-                case "1", "yes" -> {
-                    pdfPath = enterPDFPath();
-                    imageToPDF(new File(pdfPath));
-                    isTrue = false;
-                }
-                case "0", "no" -> {
-                    System.out.println("Your file will be saved in - 'signatureToPDF/pdfs'\n");
-                    imageToPDF(DEFAULT_PDF_PATH);
-                    isTrue = false;
-                }
-                default -> System.out.println("wrong operator");
-            }
-        } while (isTrue);
-
+        imageToPDF(new File(enterPDFPath()));
     }
 
     private static String enterPDFPath() {
@@ -86,7 +62,7 @@ public class UIForSignatureToImageConvert {
                 //if first time the path was incorrect the console will show WARNING
                 System.out.println(RED_CONSOLE_COLOR + " --- WARNING!!! '" + pdfPath + "' is not valid path ---" + RESET_CONSOLE_COLOR);
             }
-            System.out.println("please enter valid PDF file absolute path");
+            System.out.println("Please enter valid PDF file absolute path");
             pdfPath = scanner.nextLine();
 
             try {
