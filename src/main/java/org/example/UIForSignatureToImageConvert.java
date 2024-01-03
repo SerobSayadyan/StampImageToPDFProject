@@ -20,8 +20,8 @@ import java.util.Scanner;
 
 public class UIForSignatureToImageConvert {
 
-    private static final File IMG_STAMP_MODEL_NO_SIGNATURE = new File(Objects.requireNonNull(UIForSignatureToImageConvert.class.getClassLoader().getResource("img/Black Creative Consultant Logo.jpg")).getPath());
-    private static final File IMG_STAMP_WITH_SIGNATURE = new File(Objects.requireNonNull(UIForSignatureToImageConvert.class.getClassLoader().getResource("img/Stamp_with_signature.jpg")).getPath());
+    private static final File IMG_STAMP_MODEL_NO_SIGNATURE = new File(Objects.requireNonNull(UIForSignatureToImageConvert.class.getClassLoader().getResource("img/Black_Creative_Consultant_Logo.jpg")).getPath());
+    private static final File IMG_STAMP_WITH_SIGNATURE = new File(UIForSignatureToImageConvert.class.getClassLoader().getResource("img/Stamp_with_signature.jpg").getPath());
     private static final String RED_CONSOLE_COLOR = "\u001B[31m";
     private static final String YELLOW_CONSOLE_COLOR = "\u001B[33m";
     private static final String RESET_CONSOLE_COLOR = "\u001B[0m";
